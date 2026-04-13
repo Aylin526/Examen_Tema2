@@ -1,20 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
   <meta charset="UTF-8">
   <title>Juego de Portero</title>
 
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- CSS -->
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body>
 
+  <!-- NAVBAR -->
   <nav class="navbar navbar-dark">
     <div class="container">
-      <span class="navbar-brand fw-bold">🧤 Juego de Portero</span>
+      <span class="navbar-brand fw-bold">🧤 Juego de Portero </span>
     </div>
   </nav>
 
+  <!-- 🔥 PANTALLA DE INICIO -->
+  <div id="startScreen" class="start-screen">
+    <div class="start-box">
+      <h1>🧤 Portero Pro</h1>
+
+      <p>Instrucciones:</p>
+      <ul>
+        <li>⚽ Haz clic en los balones para atajarlos</li>
+        <li>📈 Sube de nivel cada 50 puntos</li>
+        <li>🏆 Intenta romper tu récord</li>
+        <li>💥 No dejes que los tiros te superen</li>
+      </ul>
+
+      <button id="startBtn" class="btn btn-success btn-lg">
+        ▶ Jugar
+      </button>
+    </div>
+  </div>
+
+  <!-- CONTENIDO JUEGO -->
   <main class="container my-4 text-center">
     <h1>Atrapa los tiros</h1>
 
@@ -32,8 +58,9 @@
   </main>
 
   <footer class="text-center py-3 text-white">
-    © 2026 Juego de Portero
-  </footer>
+  <p class="mb-0">© 2026 Juego de Portero</p>
+  <small>Desarrollado por Aylin Guadalupe Lucas Alvarado</small>
+</footer>
 
   <script src="assets/js/main.js"></script>
 </body>

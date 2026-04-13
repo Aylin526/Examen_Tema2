@@ -179,3 +179,52 @@ function animate() {
 // =============================
 createInitialBalls();
 animate();
+// =============================
+// 🔥 CONTROL DE INICIO
+// =============================
+let gameStarted = false;
+
+const startScreen = document.getElementById("startScreen");
+const startBtn = document.getElementById("startBtn");
+
+// Detener juego al inicio
+function gameLoop() {
+  if (!gameStarted) return;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // ⚽ BALONES
+  balls.forEach(ball => {
+    ball.y += ball.speed;
+    ctx.drawImage(ballImage, ball.x, ball.y, ball.size, ball.size);
+
+    if (ball.y > canvas.height + 50) {
+      ball.x = Math.random() * canvas.width;
+      ball.y = -50;
+      ball.size = Math.random() * 25 + 25;
+    }
+  });
+
+  // 💥 PARTÍCULAS
+  particles.forEach((p, i) => {
+    ctx.fillStyle = "rgba(0,255,200,1)";
+    ctx.fillRect(p.x, p.y, 3, 3);
+
+    p.x += p.dx;
+    p.y += p.dy;
+    p.life--;
+
+    if (p.life <= 0) particles.splice(i, 1);
+  });
+
+  requestAnimationFrame(gameLoop);
+}
+
+// Iniciar juego
+startBtn.addEventListener("click", () => {
+  gameStarted = true;
+  startScreen.style.display = "none";
+
+  createInitialBalls();
+  gameLoop();
+});
