@@ -5,11 +5,11 @@ body {
   display: flex;
   flex-direction: column;
 
-  /* 🔹 FONDO CON IMAGEN */
+  /* Fondo estadio */
   background: url("../img/estadio.webp") no-repeat center center/cover;
 }
 
-/* 🔹 Capa oscura encima del fondo */
+/* Oscurecer fondo */
 body::before {
   content: "";
   position: fixed;
@@ -17,7 +17,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0,0,0,0.6);
   z-index: -1;
 }
 
@@ -26,48 +26,46 @@ main {
 }
 
 h1 {
-  font-weight: bold;
   color: white;
   text-shadow: 0 0 10px rgba(0,0,0,0.8);
 }
 
-/* 🔹 CONTENEDOR GLASS */
+/* SCORE */
+#score {
+  font-size: 28px;
+  font-weight: bold;
+  color: #00ffcc;
+  text-shadow: 0 0 10px rgba(0,255,204,0.7);
+  margin-bottom: 15px;
+}
+
+/* Contenedor glass */
 .canvas-container {
   width: 80%;
   max-width: 900px;
   padding: 20px;
   border-radius: 20px;
 
-  /* EFECTO VIDRIO */
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255,255,255,0.1);
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255,255,255,0.2);
 
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
 }
 
-/* 🔹 CANVAS MODERNO */
+/* Canvas */
 canvas {
   width: 100%;
   height: 400px;
   border-radius: 15px;
-
-  /* Transparente */
-  background: rgba(0, 0, 0, 0.4);
-
+  background: rgba(0,0,0,0.4);
   border: 1px solid rgba(255,255,255,0.2);
-
-  box-shadow: inset 0 0 15px rgba(255,255,255,0.1);
 }
 
-/* 🔹 NAVBAR Y FOOTER MÁS TRANSPARENTES */
-.navbar {
-  background: rgba(0, 0, 0, 0.6) !important;
+/* Navbar y footer */
+.navbar, footer {
+  background: rgba(0,0,0,0.6);
   backdrop-filter: blur(10px);
-}
-
-footer {
-  background: rgba(0, 0, 0, 0.6);
+  color: white;
 }
