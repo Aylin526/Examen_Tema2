@@ -71,4 +71,25 @@ function animate() {
 ballImage.onload = () => {
   createBalls();
   animate();
+  canvas.addEventListener("click", function (e) {
+  const rect = canvas.getBoundingClientRect();
+
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+
+  // Revisar cada balón
+  balls = balls.filter(ball => {
+    const centerX = ball.x + ball.size / 2;
+    const centerY = ball.y + ball.size / 2;
+    const radius = ball.size / 2;
+
+    const dx = mouseX - centerX;
+    const dy = mouseY - centerY;
+
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    // Si haces clic dentro → eliminar
+    return distance > radius;
+  });
+});
 };
