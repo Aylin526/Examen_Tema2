@@ -10,18 +10,33 @@ resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
 // =============================
-// 🔹 BALÓN (OBJETO)
+// 🔹 IMAGEN DEL BALÓN
 // =============================
 const ballImage = new Image();
 ballImage.src = "assets/img/ball.png";
 
-const ball = {
-  x: 100,
-  y: 100,
-  size: 50,
-  dx: 3, // velocidad en X
-  dy: 3  // velocidad en Y
-};
+// =============================
+// 🔹 ARREGLO DE BALONES
+// =============================
+let balls = [];
+const NUM_BALLS = 10; // puedes cambiar la cantidad
+
+// Crear balones aleatorios
+function createBalls() {
+  balls = [];
+
+  for (let i = 0; i < NUM_BALLS; i++) {
+    let size = Math.random() * 30 + 30; // tamaño entre 30 y 60
+
+    balls.push({
+      x: Math.random() * (canvas.width - size),
+      y: Math.random() * (canvas.height - size),
+      size: size,
+      dx: (Math.random() - 0.5) * 6, // velocidad aleatoria
+      dy: (Math.random() - 0.5) * 6
+    });
+  }
+}
 
 // =============================
 // 🔹 ANIMACIÓN
@@ -29,26 +44,31 @@ const ball = {
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Dibujar balón
-  ctx.drawImage(ballImage, ball.x, ball.y, ball.size, ball.size);
+  balls.forEach(ball => {
+    // Dibujar
+    ctx.drawImage(ballImage, ball.x, ball.y, ball.size, ball.size);
 
-  // Movimiento
-  ball.x += ball.dx;
-  ball.y += ball.dy;
+    // Movimiento
+    ball.x += ball.dx;
+    ball.y += ball.dy;
 
-  // Rebote en bordes
-  if (ball.x + ball.size > canvas.width || ball.x < 0) {
-    ball.dx *= -1;
-  }
+    // Rebotes
+    if (ball.x + ball.size > canvas.width || ball.x < 0) {
+      ball.dx *= -1;
+    }
 
-  if (ball.y + ball.size > canvas.height || ball.y < 0) {
-    ball.dy *= -1;
-  }
+    if (ball.y + ball.size > canvas.height || ball.y < 0) {
+      ball.dy *= -1;
+    }
+  });
 
   requestAnimationFrame(animate);
 }
 
-// Esperar a que cargue la imagen
+// =============================
+// 🔹 INICIO
+// =============================
 ballImage.onload = () => {
+  createBalls();
   animate();
 };
