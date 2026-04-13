@@ -41,7 +41,13 @@ h1 {
   font-size: 22px;
   color: #ffd700;
   text-shadow: 0 0 10px rgba(255,215,0,0.7);
-  margin-bottom: 20px;
+}
+
+/* HIGH SCORE */
+#highScore {
+  font-size: 20px;
+  color: #ff4d4d;
+  text-shadow: 0 0 10px rgba(255,77,77,0.7);
 }
 
 /* CONTENEDOR */

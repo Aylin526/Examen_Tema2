@@ -10,7 +10,7 @@ resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
 // =============================
-// 🔹 SCORE Y NIVEL
+// 🔹 SCORE / NIVEL
 // =============================
 let score = 0;
 let level = 1;
@@ -18,7 +18,24 @@ let level = 1;
 const scoreElement = document.getElementById("score");
 const levelElement = document.getElementById("level");
 
-// Dificultad
+// =============================
+// 🔹 HIGH SCORE
+// =============================
+const highScoreElement = document.getElementById("highScore");
+let highScore = localStorage.getItem("highScore") || 0;
+
+highScoreElement.textContent = "Récord: " + highScore;
+
+// BOTÓN PRO
+document.getElementById("resetHighScore").addEventListener("click", () => {
+  localStorage.removeItem("highScore");
+  highScore = 0;
+  highScoreElement.textContent = "Récord: 0";
+});
+
+// =============================
+// 🔹 DIFICULTAD
+// =============================
 let baseSpeed = 3;
 
 // =============================
@@ -32,7 +49,6 @@ ballImage.src = "assets/img/ball.png";
 // =============================
 let balls = [];
 
-// Crear un balón
 function createBall() {
   let size = Math.random() * 30 + 30;
 
@@ -45,7 +61,6 @@ function createBall() {
   });
 }
 
-// Crear iniciales
 function createInitialBalls() {
   for (let i = 0; i < 10; i++) {
     createBall();
@@ -77,7 +92,7 @@ function animate() {
 }
 
 // =============================
-// 🔹 NIVELES (MEJORA PRO)
+// 🔹 NIVELES
 // =============================
 function updateLevel() {
   let newLevel = Math.floor(score / 50) + 1;
@@ -88,10 +103,21 @@ function updateLevel() {
 
     levelElement.textContent = "Nivel: " + level;
 
-    // 🔥 Agregar nuevos balones SIN reiniciar
+    // MEJORA PRO: agregar balones sin reiniciar
     for (let i = 0; i < 2; i++) {
       createBall();
     }
+  }
+}
+
+// =============================
+// 🔹 HIGH SCORE UPDATE
+// =============================
+function updateHighScore() {
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem("highScore", highScore);
+    highScoreElement.textContent = "Récord: " + highScore;
   }
 }
 
@@ -118,6 +144,7 @@ canvas.addEventListener("click", function (e) {
       scoreElement.textContent = "Puntos: " + score;
 
       updateLevel();
+      updateHighScore();
 
       return false;
     }
