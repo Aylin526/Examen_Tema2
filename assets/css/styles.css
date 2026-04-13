@@ -5,11 +5,9 @@ body {
   display: flex;
   flex-direction: column;
 
-  /* Fondo estadio */
-  background: url("../img/estadio.webp") no-repeat center center/cover;
+  background: url("../img/estadio.jpg") no-repeat center center/cover;
 }
 
-/* Oscurecer fondo */
 body::before {
   content: "";
   position: fixed;
@@ -36,10 +34,17 @@ h1 {
   font-weight: bold;
   color: #00ffcc;
   text-shadow: 0 0 10px rgba(0,255,204,0.7);
-  margin-bottom: 15px;
 }
 
-/* Contenedor glass */
+/* NIVEL */
+#level {
+  font-size: 22px;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255,215,0,0.7);
+  margin-bottom: 20px;
+}
+
+/* CONTENEDOR */
 .canvas-container {
   width: 80%;
   max-width: 900px;
@@ -54,7 +59,7 @@ h1 {
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
 }
 
-/* Canvas */
+/* CANVAS */
 canvas {
   width: 100%;
   height: 400px;
@@ -63,7 +68,7 @@ canvas {
   border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* Navbar y footer */
+/* NAVBAR Y FOOTER */
 .navbar, footer {
   background: rgba(0,0,0,0.6);
   backdrop-filter: blur(10px);

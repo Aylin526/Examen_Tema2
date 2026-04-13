@@ -10,10 +10,16 @@ resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
 // =============================
-// 🔹 SCORE
+// 🔹 SCORE Y NIVEL
 // =============================
 let score = 0;
+let level = 1;
+
 const scoreElement = document.getElementById("score");
+const levelElement = document.getElementById("level");
+
+// Dificultad
+let baseSpeed = 3;
 
 // =============================
 // 🔹 IMAGEN
@@ -25,21 +31,24 @@ ballImage.src = "assets/img/ball.png";
 // 🔹 BALONES
 // =============================
 let balls = [];
-const NUM_BALLS = 10;
 
-function createBalls() {
-  balls = [];
+// Crear un balón
+function createBall() {
+  let size = Math.random() * 30 + 30;
 
-  for (let i = 0; i < NUM_BALLS; i++) {
-    let size = Math.random() * 30 + 30;
+  balls.push({
+    x: Math.random() * (canvas.width - size),
+    y: Math.random() * (canvas.height - size),
+    size: size,
+    dx: (Math.random() - 0.5) * baseSpeed * 2,
+    dy: (Math.random() - 0.5) * baseSpeed * 2
+  });
+}
 
-    balls.push({
-      x: Math.random() * (canvas.width - size),
-      y: Math.random() * (canvas.height - size),
-      size: size,
-      dx: (Math.random() - 0.5) * 6,
-      dy: (Math.random() - 0.5) * 6
-    });
+// Crear iniciales
+function createInitialBalls() {
+  for (let i = 0; i < 10; i++) {
+    createBall();
   }
 }
 
@@ -55,7 +64,6 @@ function animate() {
     ball.x += ball.dx;
     ball.y += ball.dy;
 
-    // Rebotes
     if (ball.x + ball.size > canvas.width || ball.x < 0) {
       ball.dx *= -1;
     }
@@ -69,7 +77,26 @@ function animate() {
 }
 
 // =============================
-// 🔹 CLICK (ELIMINAR + PUNTOS)
+// 🔹 NIVELES (MEJORA PRO)
+// =============================
+function updateLevel() {
+  let newLevel = Math.floor(score / 50) + 1;
+
+  if (newLevel > level) {
+    level = newLevel;
+    baseSpeed += 0.5;
+
+    levelElement.textContent = "Nivel: " + level;
+
+    // 🔥 Agregar nuevos balones SIN reiniciar
+    for (let i = 0; i < 2; i++) {
+      createBall();
+    }
+  }
+}
+
+// =============================
+// 🔹 CLICK
 // =============================
 canvas.addEventListener("click", function (e) {
   const rect = canvas.getBoundingClientRect();
@@ -89,6 +116,9 @@ canvas.addEventListener("click", function (e) {
     if (distance <= radius) {
       score += 10;
       scoreElement.textContent = "Puntos: " + score;
+
+      updateLevel();
+
       return false;
     }
 
@@ -100,6 +130,6 @@ canvas.addEventListener("click", function (e) {
 // 🔹 INICIO
 // =============================
 ballImage.onload = () => {
-  createBalls();
+  createInitialBalls();
   animate();
 };
