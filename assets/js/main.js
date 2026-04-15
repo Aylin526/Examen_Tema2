@@ -53,7 +53,7 @@ function createParticles(x, y) {
 // =============================
 // 🔹 DIFICULTAD
 // =============================
-let baseSpeed = 2.5;
+let baseSpeed = 1.5;
 
 // =============================
 // 🔹 BALÓN
